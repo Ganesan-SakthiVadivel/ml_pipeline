@@ -1,13 +1,15 @@
 import psycopg2
 import pandas as pd
+import os
 
 DB_CONFIG = {
-    "dbname": "ml_data",
-    "user": "postgres",
-    "password": "ganesan",
-    "host": "127.0.0.1",
-    "port": 5432
+    "dbname": os.getenv("DB_NAME"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "host": os.getenv("DB_HOST"),
+    "port": int(os.getenv("DB_PORT", 5432))
 }
+
 
 def fetch_training_data():
     conn = psycopg2.connect(**DB_CONFIG)
